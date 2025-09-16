@@ -41,3 +41,22 @@ app-example
 # generated native folders
 /ios
 /android
+
+# Node modules
+node_modules/
+
+# Expo / React Native
+.expo/
+.expo-shared/
+dist/
+
+# VS Code / Visual Studio
+.vs/
+.vscode/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
