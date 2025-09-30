@@ -1,4 +1,4 @@
-import { Text, View, Button, StyleSheet } from "react-native";
+import { Text, View, Button, StyleSheet, Pressable } from "react-native";
 import { Link } from "expo-router";
 
 export default function HomePage() {
@@ -15,7 +15,10 @@ export default function HomePage() {
           <Text style={styles.subtitle}>New Game</Text>
           <View style={styles.gameBox}>
               <Text style={styles.subtitle}>Select Mode</Text>
-              <Button color="red" title="Start Game" onPress={() => alert("Game Starting...")} />
+              {/*<Button color="red" title="Start Game" onPress={() => alert("Game Starting...")} />*/}
+              <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => alert("Game Starting...")}>
+                  <Text style={styles.buttonText}>Start Game</Text>
+              </Pressable>
           </View>
 
           <View style={styles.friendBox}>
@@ -79,5 +82,13 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: "black",
         alignItems: "center",
+    },
+    buttonPressed: {
+        backgroundColor: "grey",
+    },
+    buttonText: {
+        color: "white",
+        fontSize: 16,
+        fontWeight: "bold",
     },
 });
