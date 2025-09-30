@@ -1,11 +1,14 @@
 import { Text, View, Button, StyleSheet, Pressable } from "react-native";
 import { Link } from "expo-router";
 import { useState } from "react";
+import Slider from "@react-native-community/slider";
 
 export default function HomePage() {
 
     const [selectedGameMode, setGameMode] = useState<number | null>(null);
     const gameModes = ["Twister", "Random", "Memory", "Speed"];
+
+    const [difficulty, setDifficulty] = useState(0);
 
   return (
     <View style={styles.container}>
@@ -35,6 +38,10 @@ export default function HomePage() {
                   );
               })}
               </View>
+              <Text style={styles.subtitle}>Set Difficulty</Text>
+              <Slider style={styles.slider} minimumValue={0} maximumValue={10} step={1} value={difficulty} onValueChange={value => setDifficulty(value)}
+                  minimumTrackTintColor="purple" maximumTrackTintColor="green" thumbTintColor="pink" />
+              <Text style={styles.subtitle}>Difficulty: V{difficulty}</Text>
               
               {/*<Button color="red" title="Start Game" onPress={() => alert("Game Starting...")} />*/}
               <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => alert("Game Starting...")}>
@@ -139,5 +146,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 2,
         marginBottom: 30,
+    },
+    slider: {
+        width: "80%",
+        height: 40,
     },
 });
