@@ -11,6 +11,15 @@ export default function HomePage() {
               <Text style={styles.subtitle}>Games Played</Text>
               <Text style={styles.stats}>123 Total</Text>
           </View>
+
+          <Text style={styles.subtitle}>New Game</Text>
+          <View style={styles.gameBox}>
+              <Text style={styles.subtitle}>Select Mode</Text>
+          </View>
+
+          <View style={styles.friendBox}>
+              <Text style={styles.subtitle}>Friends</Text>
+          </View>
     </View>
   );
 }
@@ -45,5 +54,23 @@ const styles = StyleSheet.create({
     },
     stats: {
         fontSize: 20,
+    },
+    gameBox: {
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: "grey",
+        width: "90%",
+        alignItems: "center",
+        padding: 15,
+        marginBottom: 30,
+    },
+    friendBox: {
+        borderRadius: 10,
+        borderWidth: 2,
+        borderColor: "grey",
+        width: "90%",
+        alignItems: "center",
+        padding: 15,
+        marginBottom: 30,
     },
 });
