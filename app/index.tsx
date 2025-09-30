@@ -1,7 +1,12 @@
 import { Text, View, Button, StyleSheet, Pressable } from "react-native";
 import { Link } from "expo-router";
+import { useState } from "react";
 
 export default function HomePage() {
+
+    const [selectedGameMode, setGameMode] = useState<number | null>(null);
+    const gameModes = ["Twister", "Random", "Memory", "Speed"];
+
   return (
     <View style={styles.container}>
           <Text style={styles.title}>Kilter Board App</Text>
@@ -12,9 +17,25 @@ export default function HomePage() {
               <Text style={styles.stats}>123 Total</Text>
           </View>
 
+       
           <Text style={styles.subtitle}>New Game</Text>
           <View style={styles.gameBox}>
               <Text style={styles.subtitle}>Select Mode</Text>
+              <View style={styles.gameModesBox}>
+                {gameModes.map((gameMode, index) => {
+                  const isSelected = selectedGameMode === index;
+                  return (
+                      <Pressable key={index} onPress={() => setGameMode(index)}
+                          style={[styles.modesButton,
+                          isSelected && styles.buttonPressed,
+                          index === 0 && styles.leftButton,
+                          index === gameModes.length - 1 && styles.rightButton,]}>
+                          <Text style={[styles.modesButtonText, isSelected && styles.buttonPressed]}>{gameMode}</Text>
+                      </Pressable>
+                  );
+              })}
+              </View>
+              
               {/*<Button color="red" title="Start Game" onPress={() => alert("Game Starting...")} />*/}
               <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => alert("Game Starting...")}>
                   <Text style={styles.buttonText}>Start Game</Text>
@@ -83,6 +104,19 @@ const styles = StyleSheet.create({
         backgroundColor: "black",
         alignItems: "center",
     },
+    modesButton: {
+        width: "25%",
+        borderRadius: 10,
+        borderColor: "grey",
+        borderWidth: 2,
+        alignItems: "center",
+        marginLeft: 3,
+    },
+    modesButtonText: {
+        color: "black",
+        fontSize: 16,
+        fontWeight: "bold",
+    },
     buttonPressed: {
         backgroundColor: "grey",
     },
@@ -90,5 +124,20 @@ const styles = StyleSheet.create({
         color: "white",
         fontSize: 16,
         fontWeight: "bold",
+    },
+    leftButton: {
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+    },
+    rightButton: {
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+    },
+    gameModesBox: {
+        flexDirection: "row",
+        width: "100%",
+        alignItems: "center",
+        padding: 2,
+        marginBottom: 30,
     },
 });
