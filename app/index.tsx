@@ -15,6 +15,7 @@ export default function HomePage() {
           <Text style={styles.subtitle}>New Game</Text>
           <View style={styles.gameBox}>
               <Text style={styles.subtitle}>Select Mode</Text>
+              <Button color="red" title="Start Game" onPress={() => alert("Game Starting...")} />
           </View>
 
           <View style={styles.friendBox}>
@@ -72,5 +73,11 @@ const styles = StyleSheet.create({
         alignItems: "center",
         padding: 15,
         marginBottom: 30,
+    },
+    startButton: {
+        width: "75%",
+        borderRadius: 10,
+        backgroundColor: "black",
+        alignItems: "center",
     },
 });
