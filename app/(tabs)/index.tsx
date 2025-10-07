@@ -23,7 +23,6 @@ export default function HomePage() {
 
   return (
       <View style={styles.container}>
-          <Stack.Screen options={{ headerShown:false} } />
           <Text style={styles.title}>Kilter Board App!</Text>
 
           <Text style={styles.subtitle}>Player Name Stats</Text>
