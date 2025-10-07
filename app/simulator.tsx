@@ -7,6 +7,8 @@ export default function SimulatorPage() {
 
     const router = useRouter();
 
+    const circles = Array.from({ length: 121 });
+
     return (
         <View style={styles.container}>
             <Stack.Screen options={{ headerShown: false }} />
@@ -14,7 +16,9 @@ export default function SimulatorPage() {
 
             <View style={styles.kilterBoard}>
 
-
+                {circles.map((_, index) => (
+                    < View key={index} style={styles.circle} />
+                ))}
 
             </View>
 
@@ -23,7 +27,7 @@ export default function SimulatorPage() {
                 <Text style={styles.subtitle}>[Game] Mode</Text>
 
 
-                <Text style={styles.subtitle}>Time: 0</Text>
+                <Text style={styles.subtitle}>Time: 00:00:00</Text>
 
                 <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => router.push("/simulator") }>
                     <Text style={styles.buttonText}>New Game</Text>
@@ -85,8 +89,20 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: "grey",
         width: "100%",
+        height: 350,
         alignItems: "center",
         padding: 15,
         marginBottom: 20,
-    }
+        flexDirection: "row",
+        flexWrap: "wrap"
+    },
+    circle: {
+        width: 25,
+        height: 25,
+        borderRadius: 25 / 2,
+        backgroundColor: "red",
+        borderColor: "black",
+        borderWidth: 2,
+        margin: 2,
+    },
 });
