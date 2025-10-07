@@ -1,19 +1,30 @@
 import { Text, View, Button, StyleSheet, Pressable } from "react-native";
-import { Link, Stack } from "expo-router";
+import { Link, Stack, useRouter } from "expo-router";
 import { useState } from "react";
 import Slider from "@react-native-community/slider";
 
 export default function HomePage() {
+
+    const router = useRouter();
 
     const [selectedGameMode, setGameMode] = useState<number | null>(null);
     const gameModes = ["Twister", "Random", "Memory", "Speed"];
 
     const [difficulty, setDifficulty] = useState(0);
 
+    const handleStart = () => {
+        if (selectedGameMode === null) {
+            alert("Select a game mode before starting!");
+        }
+        else {
+            router.push("/simulator");
+        }
+    }
+
   return (
       <View style={styles.container}>
           <Stack.Screen options={{ headerShown:false} } />
-          <Text style={styles.title}>Kilter Board App</Text>
+          <Text style={styles.title}>Kilter Board App!</Text>
 
           <Text style={styles.subtitle}>Player Name Stats</Text>
           <View style={styles.statsBoxes}>
@@ -29,7 +40,7 @@ export default function HomePage() {
                 {gameModes.map((gameMode, index) => {
                   const isSelected = selectedGameMode === index;
                   return (
-                      <Pressable key={index} onPress={() => setGameMode(index)}
+                      <Pressable key={index} onPress={() => setGameMode(isSelected ? null : index)}
                           style={[styles.modesButton,
                           isSelected && styles.buttonPressed,
                           index === 0 && styles.leftButton,
@@ -45,7 +56,7 @@ export default function HomePage() {
               <Text style={styles.centerSubtitle}>Difficulty: V{difficulty}</Text>
               
               {/*<Button color="red" title="Start Game" onPress={() => alert("Game Starting...")} />*/}
-              <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => alert("Game Starting...")}>
+              <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={handleStart}>
                   <Text style={styles.buttonText}>Start Game</Text>
               </Pressable>
           </View>
