@@ -3,7 +3,7 @@ import { Link, Stack, useRouter } from "expo-router";
 import { useState } from "react";
 import Slider from "@react-native-community/slider";
 
-export default function HomePage() {
+export default function SimulatorPage() {
 
 
     const [selectedGameMode, setGameMode] = useState<number | null>(null);
