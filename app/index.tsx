@@ -1,5 +1,5 @@
 import { Text, View, Button, StyleSheet, Pressable } from "react-native";
-import { Link } from "expo-router";
+import { Link, Stack } from "expo-router";
 import { useState } from "react";
 import Slider from "@react-native-community/slider";
 
@@ -11,7 +11,8 @@ export default function HomePage() {
     const [difficulty, setDifficulty] = useState(0);
 
   return (
-    <View style={styles.container}>
+      <View style={styles.container}>
+          <Stack.Screen options={{ headerShown:false} } />
           <Text style={styles.title}>Kilter Board App</Text>
 
           <Text style={styles.subtitle}>Player Name Stats</Text>
