@@ -52,6 +52,8 @@ export default function HomePage() {
 
           <View style={styles.friendBox}>
               <Text style={styles.subtitle}>Friends</Text>
+              <Text style={styles.subtitle}>John Doe</Text>
+              <Text style={styles.details}>johndoe@email.com</Text>
           </View>
     </View>
   );
@@ -69,7 +71,7 @@ const styles = StyleSheet.create({
     title: {
         fontSize: 26,
         fontWeight: "bold",
-        marginBottom: 20,
+        marginBottom: 50,
     },
     subtitle: {
         fontSize: 16,
@@ -93,13 +95,15 @@ const styles = StyleSheet.create({
         borderWidth: 2,
     },
     stats: {
-        fontSize: 20,
+        fontSize: 24,
+        textAlign: "left",
+        width: "100%",
     },
     gameBox: {
         borderRadius: 10,
         borderWidth: 2,
         borderColor: "grey",
-        width: "95%",
+        width: "100%",
         alignItems: "center",
         padding: 15,
         marginBottom: 20,
@@ -108,7 +112,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 2,
         borderColor: "grey",
-        width: "90%",
+        width: "100%",
         alignItems: "center",
         padding: 15,
         marginBottom: 30,
@@ -160,5 +164,10 @@ const styles = StyleSheet.create({
     slider: {
         width: "80%",
         height: 40,
+    },
+    details: {
+        fontSize: 14,
+        textAlign: "left",
+        width: "100%",
     },
 });
