@@ -24,7 +24,7 @@ export default function HomePage() {
        
           <Text style={styles.subtitle}>New Game</Text>
           <View style={styles.gameBox}>
-              <Text style={styles.subtitle}>Select Mode</Text>
+              <Text style={styles.centerSubtitle}>Select Mode</Text>
               <View style={styles.gameModesBox}>
                 {gameModes.map((gameMode, index) => {
                   const isSelected = selectedGameMode === index;
@@ -39,10 +39,10 @@ export default function HomePage() {
                   );
               })}
               </View>
-              <Text style={styles.subtitle}>Set Difficulty</Text>
+              <Text style={styles.centerSubtitle}>Set Difficulty</Text>
               <Slider style={styles.slider} minimumValue={0} maximumValue={10} step={1} value={difficulty} onValueChange={value => setDifficulty(value)}
                   minimumTrackTintColor="purple" maximumTrackTintColor="green" thumbTintColor="pink" />
-              <Text style={styles.subtitle}>Difficulty: V{difficulty}</Text>
+              <Text style={styles.centerSubtitle}>Difficulty: V{difficulty}</Text>
               
               {/*<Button color="red" title="Start Game" onPress={() => alert("Game Starting...")} />*/}
               <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => alert("Game Starting...")}>
@@ -75,10 +75,17 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 10,
         fontWeight: "600",
+        textAlign: "left",
+        width: "100%",
+    },
+    centerSubtitle: {
+        fontSize: 16,
+        marginBottom: 10,
+        fontWeight: "600",
     },
     statsBoxes: {
         borderRadius: 10,
-        width: "70%",
+        width: "100%",
         alignItems: "center",
         padding: 15,
         borderColor: "grey",
@@ -92,10 +99,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderWidth: 2,
         borderColor: "grey",
-        width: "90%",
+        width: "95%",
         alignItems: "center",
         padding: 15,
-        marginBottom: 30,
+        marginBottom: 20,
     },
     friendBox: {
         borderRadius: 10,
@@ -113,16 +120,18 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     modesButton: {
-        width: "25%",
+        flex: 1,
         borderRadius: 10,
         borderColor: "grey",
         borderWidth: 2,
         alignItems: "center",
-        marginLeft: 3,
+        justifyContent: "center",
+        paddingVertical: 8,
+        marginHorizontal: 5,
     },
     modesButtonText: {
         color: "black",
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: "bold",
     },
     buttonPressed: {
@@ -143,9 +152,9 @@ const styles = StyleSheet.create({
     },
     gameModesBox: {
         flexDirection: "row",
-        width: "100%",
+        justifyContent: "center",
+        width: "95%",
         alignItems: "center",
-        padding: 2,
         marginBottom: 30,
     },
     slider: {
