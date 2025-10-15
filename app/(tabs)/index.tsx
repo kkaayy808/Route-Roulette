@@ -2,6 +2,7 @@ import { Text, View, Button, StyleSheet, Pressable } from "react-native";
 import { Link, Stack, useRouter } from "expo-router";
 import { useState } from "react";
 import Slider from "@react-native-community/slider";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomePage() {
 
@@ -22,7 +23,7 @@ export default function HomePage() {
     }
 
   return (
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
           <Text style={styles.title}>Kilter Board App!</Text>
 
           <Text style={styles.subtitle}>Player Name Stats</Text>
@@ -65,7 +66,7 @@ export default function HomePage() {
               <Text style={styles.subtitle}>John Doe</Text>
               <Text style={styles.details}>johndoe@email.com</Text>
           </View>
-    </View>
+    </SafeAreaView>
   );
 }
 

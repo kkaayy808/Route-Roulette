@@ -1,12 +1,22 @@
-﻿import { Text } from "react-native";
-
+﻿import { Text, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ProfilePage() {
 
 
     return (
-        <Text>This is the profile page</Text>
-
+        <SafeAreaView style={styles.container}>
+            <Text>This is the profile page</Text>
+        </SafeAreaView>
     );
 }
 
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        padding: 20,
+        backgroundColor: "#f8f8f8",
+    },
+});
