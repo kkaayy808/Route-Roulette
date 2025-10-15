@@ -1,8 +1,9 @@
-import { Text, View, Button, StyleSheet, Pressable } from "react-native";
-import { Link, Stack, useRouter } from "expo-router";
+import { Text, View, StyleSheet, Pressable } from "react-native";
+import { Stack, useRouter } from "expo-router";
 import { useState } from "react";
 import Slider from "@react-native-community/slider";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 
 export default function HomePage() {
 
@@ -24,6 +25,7 @@ export default function HomePage() {
 
   return (
       <SafeAreaView style={styles.container}>
+      <StatusBar style="dark"/>
           <Text style={styles.title}>Kilter Board App!</Text>
 
           <Text style={styles.subtitle}>Player Name Stats</Text>
