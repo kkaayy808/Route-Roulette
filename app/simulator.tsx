@@ -10,23 +10,29 @@ export default function SimulatorPage() {
     const modeIndex = gameMode ? parseInt(gameMode, 10) : -1;
 
     let gridColor = "grey"
+    let gameModeName = ""
 
 
     switch (modeIndex) {
         case 0:
             gridColor = "red";
+            gameModeName = "Twister";
             break;
         case 1:
             gridColor = "blue";
+            gameModeName = "Random";
             break;
         case 2:
             gridColor = "pink";
+            gameModeName = "Memory";
             break;
         case 3:
             gridColor = "green";
+            gameModeName = "Speed";
             break;
         default:
             gridColor = "purple";
+            gameModeName = "";
     }
 
 
@@ -83,7 +89,7 @@ export default function SimulatorPage() {
     return (
         <View style={styles.container}>
             <Stack.Screen options={{ headerShown: false }} />
-            <Text style={styles.title}>Simulator Page {gameMode}</Text>
+            <Text style={styles.title}>Simulator Page</Text>
 
             <View style={styles.kilterBoard}>
 
@@ -95,7 +101,7 @@ export default function SimulatorPage() {
 
 
             <View style={styles.settings}>
-                <Text style={styles.subtitle}>[Game] Mode</Text>
+                <Text style={styles.mainSubtitle}>{gameModeName} Mode</Text>
 
 
                 <Text style={styles.subtitle}>Time: {formattedTime}</Text>
@@ -144,6 +150,13 @@ const styles = StyleSheet.create({
         fontSize: 26,
         fontWeight: "bold",
         marginBottom: 50,
+    },
+    mainSubtitle: {
+        fontSize: 20,
+        marginBottom: 10,
+        fontWeight: "700",
+        textAlign: "center",
+        width: "100%",
     },
     subtitle: {
         fontSize: 16,
