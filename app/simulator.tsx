@@ -1,7 +1,6 @@
-﻿import { Text, View, Button, StyleSheet, Pressable , TouchableOpacity} from "react-native";
-import { Link, Stack, useRouter } from "expo-router";
+﻿import { Text, View, StyleSheet, Pressable , TouchableOpacity} from "react-native";
+import { Stack, useRouter } from "expo-router";
 import { useState , useEffect, useRef} from "react";
-import Slider from "@react-native-community/slider";
 import { Ionicons } from "@expo/vector-icons";
 
 
