@@ -6,6 +6,13 @@ import { Ionicons } from "@expo/vector-icons";
 
 export default function SimulatorPage() {
 
+    const [elapsedTime, setElapsedTime] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+    const intervalRef = useRef<number | null>(null);
+    const startTimeRef = useRef(0);
+
+    const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
     const { gameMode } = useLocalSearchParams<{ gameMode?: string }>();
     const modeIndex = gameMode ? parseInt(gameMode, 10) : -1;
 
@@ -21,6 +28,9 @@ export default function SimulatorPage() {
         case 1:
             gridColor = "blue";
             gameModeName = "Random";
+            //intervalRef.current = setInterval(() => {
+            //    setActiveIndex(Math.floor(Math.random() * 121));
+            //}, 300);            
             break;
         case 2:
             gridColor = "pink";
@@ -36,13 +46,6 @@ export default function SimulatorPage() {
     }
 
 
-
-    const [elapsedTime, setElapsedTime] = useState(0);
-    const [isRunning, setIsRunning] = useState(false);
-    const intervalRef = useRef<number | null>(null);
-    const startTimeRef = useRef(0);
-
-
     useEffect(() => {
         if (isRunning) {
 
@@ -50,7 +53,19 @@ export default function SimulatorPage() {
 
             intervalRef.current = setInterval(() => {
                 setElapsedTime(Date.now() - startTimeRef.current);
-            }, 10);
+
+                if (modeIndex === 1) {
+                    setActiveIndex(Math.floor(Math.random() * 121));
+                }
+            }, 300);
+
+
+            //if (modeIndex === 1) {
+            //    intervalRef.current = setInterval(() => {
+            //        setActiveIndex(Math.floor(Math.random() * 121));
+            //    }, 300);
+            //}
+
         } else {
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
@@ -61,9 +76,10 @@ export default function SimulatorPage() {
         return () => {
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
+                intervalRef.current = null;
             }
         };
-    }, [isRunning]);
+    }, [gameMode, isRunning]);
 
 
     const handlePlay = () => setIsRunning(true);
@@ -94,7 +110,7 @@ export default function SimulatorPage() {
             <View style={styles.kilterBoard}>
 
                 {circles.map((_, index) => (
-                    < View key={index} style={[styles.circle, {backgroundColor: gridColor}]} />
+                    < View key={index} style={[styles.circle, index === activeIndex && styles.activeCircle]} />
                 ))}
 
             </View>
@@ -214,5 +230,8 @@ const styles = StyleSheet.create({
         width: "95%",
         alignItems: "center",
         marginBottom: 30,
+    },
+    activeCircle: {
+        backgroundColor: "purple",
     },
 });
