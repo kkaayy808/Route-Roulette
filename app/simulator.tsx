@@ -1,10 +1,35 @@
 ﻿import { Text, View, StyleSheet, Pressable , TouchableOpacity} from "react-native";
-import { Stack, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
 import { useState , useEffect, useRef} from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 
 export default function SimulatorPage() {
+
+    const { gameMode } = useLocalSearchParams<{ gameMode?: string }>();
+    const modeIndex = gameMode ? parseInt(gameMode, 10) : -1;
+
+    let gridColor = "grey"
+
+
+    switch (modeIndex) {
+        case 0:
+            gridColor = "red";
+            break;
+        case 1:
+            gridColor = "blue";
+            break;
+        case 2:
+            gridColor = "pink";
+            break;
+        case 3:
+            gridColor = "green";
+            break;
+        default:
+            gridColor = "purple";
+    }
+
+
 
     const [elapsedTime, setElapsedTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
@@ -58,12 +83,12 @@ export default function SimulatorPage() {
     return (
         <View style={styles.container}>
             <Stack.Screen options={{ headerShown: false }} />
-            <Text style={styles.title}>Simulator Page</Text>
+            <Text style={styles.title}>Simulator Page {gameMode}</Text>
 
             <View style={styles.kilterBoard}>
 
                 {circles.map((_, index) => (
-                    < View key={index} style={styles.circle} />
+                    < View key={index} style={[styles.circle, {backgroundColor: gridColor}]} />
                 ))}
 
             </View>
@@ -166,7 +191,6 @@ const styles = StyleSheet.create({
         width: 25,
         height: 25,
         borderRadius: 25 / 2,
-        backgroundColor: "grey",
         borderColor: "black",
         borderWidth: 2,
         margin: 2,

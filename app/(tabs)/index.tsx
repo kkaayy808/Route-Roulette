@@ -19,9 +19,9 @@ export default function HomePage() {
             alert("Select a game mode before starting!");
         }
         else {
-            router.push("/simulator");
+            router.push({ pathname: "/simulator", params: { gameMode: selectedGameMode.toString() } });
         }
-    }
+    };
 
   return (
       <SafeAreaView style={styles.container}>
