@@ -2,6 +2,8 @@
 import { Link, Stack, useRouter } from "expo-router";
 import { useState , useEffect, useRef} from "react";
 import Slider from "@react-native-community/slider";
+import { Ionicons } from "@expo/vector-icons";
+
 
 export default function SimulatorPage() {
 
@@ -40,6 +42,13 @@ export default function SimulatorPage() {
 
 
                 <Text style={styles.subtitle}>Time: {formattedTime}</Text>
+                <View style={styles.controlBox}>
+
+                    <Ionicons name="caret-forward-outline" color={"black"} size={40} />
+                    <Ionicons name="pause-outline" color={"black"} size={40} />
+
+                </View>
+
 
                 <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => router.push("/simulator") }>
                     <Text style={styles.buttonText}>New Game</Text>
@@ -70,7 +79,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         marginBottom: 10,
         fontWeight: "600",
-        textAlign: "left",
+        textAlign: "center",
         width: "100%",
     },
     settings: {
@@ -116,5 +125,12 @@ const styles = StyleSheet.create({
         borderColor: "black",
         borderWidth: 2,
         margin: 2,
+    },
+    controlBox: {
+        flexDirection: "row",
+        justifyContent: "center",
+        width: "95%",
+        alignItems: "center",
+        marginBottom: 30,
     },
 });
