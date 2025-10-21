@@ -1,13 +1,25 @@
 ﻿import { Text, View, Button, StyleSheet, Pressable } from "react-native";
 import { Link, Stack, useRouter } from "expo-router";
-import { useState } from "react";
+import { useState , useEffect, useRef} from "react";
 import Slider from "@react-native-community/slider";
 
 export default function SimulatorPage() {
 
+    const [elapsedTime, setElapsedTime] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+    const intervalRef = useRef<NodeJS.Timer | null>(null);
+    const startTimeRef = useRef(0);
+
+
     const router = useRouter();
 
     const circles = Array.from({ length: 121 });
+
+
+    const minutes = Math.floor(elapsedTime / 60000);
+    const seconds = Math.floor((elapsedTime % 60000) / 1000)
+    const milliseconds = Math.floor((elapsedTime % 1000) / 10);
+    const formattedTime = `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}:${String(milliseconds).padStart(2, "0")}`;
 
     return (
         <View style={styles.container}>
@@ -27,7 +39,7 @@ export default function SimulatorPage() {
                 <Text style={styles.subtitle}>[Game] Mode</Text>
 
 
-                <Text style={styles.subtitle}>Time: 00:00:00</Text>
+                <Text style={styles.subtitle}>Time: {formattedTime}</Text>
 
                 <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => router.push("/simulator") }>
                     <Text style={styles.buttonText}>New Game</Text>
