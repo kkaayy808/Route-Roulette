@@ -1,4 +1,4 @@
-﻿import { Text, View, Button, StyleSheet, Pressable } from "react-native";
+﻿import { Text, View, Button, StyleSheet, Pressable , TouchableOpacity} from "react-native";
 import { Link, Stack, useRouter } from "expo-router";
 import { useState , useEffect, useRef} from "react";
 import Slider from "@react-native-community/slider";
@@ -9,8 +9,39 @@ export default function SimulatorPage() {
 
     const [elapsedTime, setElapsedTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
-    const intervalRef = useRef<NodeJS.Timer | null>(null);
+    const intervalRef = useRef<number | null>(null);
     const startTimeRef = useRef(0);
+
+
+    useEffect(() => {
+        if (isRunning) {
+
+            startTimeRef.current = Date.now() - elapsedTime;
+
+            intervalRef.current = setInterval(() => {
+                setElapsedTime(Date.now() - startTimeRef.current);
+            }, 10);
+        } else {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
+        }
+
+        return () => {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
+        };
+    }, [isRunning]);
+
+
+    const handlePlay = () => setIsRunning(true);
+    const handlePause = () => setIsRunning(false);
+    const handleReset = () => {
+        setIsRunning(false);
+        setElapsedTime(0);
+    };
 
 
     const router = useRouter();
@@ -44,8 +75,21 @@ export default function SimulatorPage() {
                 <Text style={styles.subtitle}>Time: {formattedTime}</Text>
                 <View style={styles.controlBox}>
 
-                    <Ionicons name="caret-forward-outline" color={"black"} size={40} />
-                    <Ionicons name="pause-outline" color={"black"} size={40} />
+                    <TouchableOpacity onPress={isRunning ? handlePause : handlePlay}>
+
+                        <Ionicons
+                            name={isRunning ? "pause-outline" : "caret-forward-outline"}
+                            size={40}
+                            color={isRunning ? "red" : "green"}
+                        />
+
+                        {/*
+                            <Ionicons name="caret-forward-outline" color={"black"} size={40} 
+                            <Ionicons name="pause-outline" color={"black"} size={40} />
+                        />*/}
+                
+
+                    </TouchableOpacity>
 
                 </View>
 
