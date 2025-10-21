@@ -38,6 +38,8 @@ export default function SimulatorPage() {
 
     const handlePlay = () => setIsRunning(true);
     const handlePause = () => setIsRunning(false);
+
+    {/* gonna use this to restart game with new game button instead of stack push */}
     const handleReset = () => {
         setIsRunning(false);
         setElapsedTime(0);
