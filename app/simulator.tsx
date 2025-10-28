@@ -19,6 +19,20 @@ export default function SimulatorPage() {
     const { gameMode } = useLocalSearchParams<{ gameMode?: string }>();
     const modeIndex = gameMode ? parseInt(gameMode, 10) : -1;
 
+
+    //game mode 3: speed mode
+    const [speed, setSpeed] = useState(1000);
+    const timeoutRef = useRef<number | null>(null);
+
+    const runSpeedMode = (currentSpeed: number) => {
+        setActiveIndex(Math.floor(Math.random() * 121));
+
+        const nextSpeed = Math.max(200, currentSpeed * 0.95);
+
+        timeoutRef.current = setTimeout(() => runSpeedMode(nextSpeed), nextSpeed);
+    };
+
+
     let gridColor = "grey"
     let gameModeName = ""
 
@@ -57,12 +71,16 @@ export default function SimulatorPage() {
             timerRef.current = setInterval(() => {
                 setElapsedTime(Date.now() - startTimeRef.current);
 
-            }, 1);
+            }, 10);
 
             if (modeIndex === 1) {
                 animationRef.current = setInterval(() => {
                     setActiveIndex(Math.floor(Math.random() * 121));
-                }, 300);
+                }, 800);
+            }
+
+            else if (modeIndex === 3) {
+                runSpeedMode(speed);
             }
 
 
@@ -93,6 +111,10 @@ export default function SimulatorPage() {
                 clearInterval(animationRef.current);
                 animationRef.current = null;
             }
+            if (timeoutRef.current) {
+                clearInterval(timeoutRef.current);
+                timeoutRef.current = null;
+            }
         }
 
         return () => {
@@ -103,6 +125,10 @@ export default function SimulatorPage() {
             if (animationRef.current) {
                 clearInterval(animationRef.current);
                 animationRef.current = null;
+            }
+            if (timeoutRef.current) {
+                clearInterval(timeoutRef.current);
+                timeoutRef.current = null;
             }
         };
 
