@@ -8,6 +8,9 @@ export default function SimulatorPage() {
 
     const [elapsedTime, setElapsedTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
+
+    const timerRef = useRef<number | null>(null);
+    const animationRef = useRef<number | null>(null);
     const intervalRef = useRef<number | null>(null);
     const startTimeRef = useRef(0);
 
@@ -51,13 +54,28 @@ export default function SimulatorPage() {
 
             startTimeRef.current = Date.now() - elapsedTime;
 
-            intervalRef.current = setInterval(() => {
+            timerRef.current = setInterval(() => {
                 setElapsedTime(Date.now() - startTimeRef.current);
 
-                if (modeIndex === 1) {
+            }, 1);
+
+            if (modeIndex === 1) {
+                animationRef.current = setInterval(() => {
                     setActiveIndex(Math.floor(Math.random() * 121));
-                }
-            }, 300);
+                }, 300);
+            }
+
+
+            //return () => clearInterval(timerId);
+
+
+            //intervalRef.current = setInterval(() => {
+            //    setElapsedTime(Date.now() - startTimeRef.current);
+
+            //    if (modeIndex === 1) {
+            //        setActiveIndex(Math.floor(Math.random() * 121));
+            //    }
+            //}, 300);
 
 
             //if (modeIndex === 1) {
@@ -67,18 +85,28 @@ export default function SimulatorPage() {
             //}
 
         } else {
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-                intervalRef.current = null;
+            if (timerRef.current) {
+                clearInterval(timerRef.current);
+                timerRef.current = null;
+            }
+            if (animationRef.current) {
+                clearInterval(animationRef.current);
+                animationRef.current = null;
             }
         }
 
         return () => {
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-                intervalRef.current = null;
+            if (timerRef.current) {
+                clearInterval(timerRef.current);
+                timerRef.current = null;
+            }
+            if (animationRef.current) {
+                clearInterval(animationRef.current);
+                animationRef.current = null;
             }
         };
+
+
     }, [gameMode, isRunning]);
 
 
