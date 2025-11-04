@@ -76,7 +76,7 @@ export default function SimulatorPage() {
             if (modeIndex === 1) {
                 animationRef.current = setInterval(() => {
                     setActiveIndex(Math.floor(Math.random() * 121));
-                }, 800);
+                }, 1500);
             }
 
             else if (modeIndex === 3) {
