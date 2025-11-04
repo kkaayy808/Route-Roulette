@@ -107,7 +107,7 @@ export default function SimulatorPage() {
                         ...prev,
                         [randomColor]: newIndex,
                     }));
-                }, 1000);
+                }, 1500);
             }
             else if (modeIndex === 1) {
                 animationRef.current = setInterval(() => {
