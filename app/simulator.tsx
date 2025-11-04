@@ -33,32 +33,56 @@ export default function SimulatorPage() {
     };
 
 
-    let gridColor = "grey"
+    //game mode 0: twister mode
+    const [activeSpots, setActiveSpots] = useState({
+        red: Math.floor(Math.random() * 121),
+        blue: Math.floor(Math.random() * 121),
+        green: Math.floor(Math.random() * 121),
+        yellow: Math.floor(Math.random() * 121),
+    });
+
+    const getCircleColor = (index: number) => {
+        if (modeIndex === 0) {
+            if (index === activeSpots.red) return "red";
+            if (index === activeSpots.blue) return "blue";
+            if (index === activeSpots.green) return "green";
+            if (index === activeSpots.yellow) return "yellow";
+            return "white";
+        }
+        else {
+            return index === activeIndex ? "purple" : "white";
+        }
+        
+    };
+
+
+
+    //let gridColor = "grey"
     let gameModeName = ""
 
 
     switch (modeIndex) {
         case 0:
-            gridColor = "red";
+            //gridColor = "red";
             gameModeName = "Twister";
             break;
         case 1:
-            gridColor = "blue";
+            //gridColor = "blue";
             gameModeName = "Random";
             //intervalRef.current = setInterval(() => {
             //    setActiveIndex(Math.floor(Math.random() * 121));
             //}, 300);            
             break;
         case 2:
-            gridColor = "pink";
+            //gridColor = "pink";
             gameModeName = "Memory";
             break;
         case 3:
-            gridColor = "green";
+            //gridColor = "green";
             gameModeName = "Speed";
             break;
         default:
-            gridColor = "purple";
+            //gridColor = "purple";
             gameModeName = "";
     }
 
@@ -73,15 +97,27 @@ export default function SimulatorPage() {
 
             }, 10);
 
-            if (modeIndex === 1) {
+            if (modeIndex === 0) {
+                intervalRef.current = setInterval(() => {
+                    const colors = ["red", "blue", "green", "yellow"];
+                    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                    const newIndex = Math.floor(Math.random() * 121);
+
+                    setActiveSpots((prev) => ({
+                        ...prev,
+                        [randomColor]: newIndex,
+                    }));
+                }, 1000);
+            }
+            else if (modeIndex === 1) {
                 animationRef.current = setInterval(() => {
                     setActiveIndex(Math.floor(Math.random() * 121));
                 }, 1500);
             }
-
             else if (modeIndex === 3) {
                 runSpeedMode(speed);
             }
+
 
 
             //return () => clearInterval(timerId);
@@ -130,6 +166,10 @@ export default function SimulatorPage() {
                 clearInterval(timeoutRef.current);
                 timeoutRef.current = null;
             }
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+                intervalRef.current = null;
+            }
         };
 
 
@@ -164,7 +204,7 @@ export default function SimulatorPage() {
             <View style={styles.kilterBoard}>
 
                 {circles.map((_, index) => (
-                    < View key={index} style={[styles.circle, index === activeIndex && styles.activeCircle]} />
+                    < View key={index} style={[styles.circle, {backgroundColor: getCircleColor(index)}]} />
                 ))}
 
             </View>
@@ -173,7 +213,7 @@ export default function SimulatorPage() {
             <View style={styles.settings}>
                 <Text style={styles.mainSubtitle}>{gameModeName} Mode</Text>
 
-
+                 
                 <Text style={styles.subtitle}>Time: {formattedTime}</Text>
                 <View style={styles.controlBox}>
 
