@@ -1,10 +1,11 @@
 ﻿import { Text, View, StyleSheet, Pressable , TouchableOpacity} from "react-native";
-import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter , useNavigation} from "expo-router";
 import { useState , useEffect, useRef} from "react";
 import { Ionicons } from "@expo/vector-icons";
 
 
 export default function SimulatorPage() {
+
 
     const [elapsedTime, setElapsedTime] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
@@ -187,6 +188,9 @@ export default function SimulatorPage() {
 
 
     const router = useRouter();
+    const navigation = useNavigation();
+
+
 
     const circles = Array.from({ length: 121 });
 
@@ -236,8 +240,9 @@ export default function SimulatorPage() {
                 </View>
 
 
-                <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => router.push("/simulator") }>
-                    <Text style={styles.buttonText}>New Game</Text>
+                {/*<Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => router.push("/simulator") }>*/}
+                <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => router.replace("/simulator")}>
+                    <Text style={styles.buttonText}>New Game!</Text>
                 </Pressable>
                 
             </View>
