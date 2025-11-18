@@ -248,7 +248,7 @@ export default function SimulatorPage() {
 
                 {/*<Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => router.push("/simulator") }>*/}
                 <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={resetGame}>
-                    <Text style={styles.buttonText}>New Game!</Text>
+                    <Text style={styles.buttonText}>New Game</Text>
                 </Pressable>
                 
             </View>
