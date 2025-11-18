@@ -87,6 +87,55 @@ export default function SimulatorPage() {
             gameModeName = "";
     }
 
+    //memory game mode
+    const [sequence, setSequence] = useState<number[]>([]);
+    const [showingSequence, setShowingSequence] = useState(false);
+
+    const nextSequence = (index: number) => {
+        return new Promise((resolve) => {
+            setActiveIndex(index);
+
+            setTimeout(() => {
+                setActiveIndex(null);
+                setTimeout(resolve, 150);
+            }, 500);
+        });
+    };
+
+    const playSequence = async () => {
+        setShowingSequence(true);
+
+        for (let i = 0; i < sequence.length; i++) {
+            await nextSequence(sequence[i]);
+        }
+
+        setShowingSequence(false);
+    };
+
+
+    const addToSequence = () => {
+        const newCircle = Math.floor(Math.random() * 121);
+
+        setSequence((prev) => {
+            const updated = [...prev, newCircle];
+
+            setTimeout(() => playSequence(), 300);
+
+            return updated;
+        });
+    };
+
+
+    const runMemoryMode = () => {
+        setSequence([]);
+        setActiveIndex(null);
+
+        setTimeout(() => addToSequence(), 500);
+    };
+
+
+
+
 
     useEffect(() => {
         if (isRunning) {
@@ -114,6 +163,13 @@ export default function SimulatorPage() {
                 animationRef.current = setInterval(() => {
                     setActiveIndex(Math.floor(Math.random() * 121));
                 }, 1500);
+            }
+            else if (modeIndex === 2) {
+                //start with empty array
+                //as game runs, it repeats stored indexes from array
+                //when it comes across an empty index, it randomly picks another index and stores it
+                //loop whole process till game done
+                runMemoryMode();
             }
             else if (modeIndex === 3) {
                 runSpeedMode(speed);
@@ -245,6 +301,17 @@ export default function SimulatorPage() {
 
                 </View>
 
+                {modeIndex === 2 && (
+                    <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]}
+                        onPress={addToSequence}
+                        disabled={showingSequence}>
+
+                        <Text style={styles.buttonText}>Next Sequence</Text>
+
+                    </Pressable>
+                    
+                )}
+
 
                 {/*<Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => router.push("/simulator") }>*/}
                 <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={resetGame}>
@@ -300,6 +367,7 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: "black",
         alignItems: "center",
+        marginBottom: 20,
     },
     buttonPressed: {
         backgroundColor: "grey",
