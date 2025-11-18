@@ -190,6 +190,12 @@ export default function SimulatorPage() {
     const router = useRouter();
     const navigation = useNavigation();
 
+    const resetGame = () => {
+        router.replace({
+            pathname: "/simulator",
+            params: { gameMode },
+        });
+    };
 
 
     const circles = Array.from({ length: 121 });
@@ -241,7 +247,7 @@ export default function SimulatorPage() {
 
 
                 {/*<Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => router.push("/simulator") }>*/}
-                <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={() => router.replace("/simulator")}>
+                <Pressable style={({ pressed }) => [styles.startButton, pressed && styles.buttonPressed,]} onPress={resetGame}>
                     <Text style={styles.buttonText}>New Game!</Text>
                 </Pressable>
                 
