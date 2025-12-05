@@ -56,8 +56,6 @@ Join our community of developers creating universal apps.
 # Route Roulette - CPSC 498 Capstone
 
 
-## Background
+## Description
 
-A kilter board in an indoor climbing wall with built-in LED lights on each hold. Climbers use a mibile app to connect to the board via bluetooth and select climbing routes.
-Once  seelcted, the board lights up the corrent holds to display the climbing path.
-
+Traditional climbing training can be repetitive and lacks interactive, engaging ways to challenge climbers skills. Route Roulette turns the kilter board into a game platform, lighting holds in dynamic patterns with games such as "Twister" or memory sequences.
