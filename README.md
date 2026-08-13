@@ -103,6 +103,16 @@ After the Expo server starts:
 4. Select a game mode and difficulty from the home screen.
 5. Launch the game to access the Kilter Board simulator.
 
+
+<p align="center">
+  <img src="assets/images/homePage.png" width="300">
+  <img src="assets/images/simulatorPage.png" width="300">
+</p>
+
+<p align="center">
+  <em>Home screen (left) and Kilter Board simulator (right)</em>
+</p>
+
 ### Project Purpose
 
 The purpose of this project is to leverage the Kilter Board to gamify indoor rock-climbing training. The project combines mobile application development, state management, timers, animations, and game logic to create an interactive training experience.
